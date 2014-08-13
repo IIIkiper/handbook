@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<artifactId>handbook</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0</version>
+	<groupId>ru.svyaznoybank</groupId>
+	
+	<properties>
+		<java.version>1.7</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<artifactory.host>10.33.112.109</artifactory.host>
+	</properties>
+	
+	<modules>
+		<module>handbook-jpa</module>
+		<module>handbook-ejb</module>
+		<module>handbook-war</module>
+		<module>handbook-ear</module>
+	</modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>ru.svyaznoybank</groupId>
+				<artifactId>handbook-ejb</artifactId>
+				<type>ejb</type>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>ru.svyaznoybank</groupId>
+				<artifactId>handbook-jpa</artifactId>
+				<type>ejb</type>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>ru.svyaznoybank</groupId>
+				<artifactId>handbook-war</artifactId>
+				<type>war</type>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>ru.svyaznoybank</groupId>
+				<artifactId>handbook-ear</artifactId>
+				<type>ear</type>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>	
+	</dependencyManagement>
+	
+<!--
+	<repositories>
+		<repository>
+			<id>my-company-repo</id>
+			<url>http://${artifactory.host}:8111/artifactory/repo</url>
+		</repository>
+	</repositories>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>my-company-repo-plugin</id>
+			<url>http://${artifactory.host}:8111/artifactory/repo</url>
+		</pluginRepository>
+	</pluginRepositories>
+-->
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>		
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ejb-plugin</artifactId>
+					<version>2.3</version>
+					<configuration>
+						<ejbVersion>3.2</ejbVersion>
+					</configuration>
+				</plugin>
+			</plugins>		
+		</pluginManagement>
+	</build>
+</project>

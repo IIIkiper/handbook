@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>ru.svyaznoybank</groupId>
+		<artifactId>handbook</artifactId>
+		<version>1.0</version>
+	</parent>
+	
+	<artifactId>handbook-war</artifactId>
+	<packaging>war</packaging>
+	
+	<properties>
+		<gwt.version>2.6.1</gwt.version>
+		<gxt.version>3.1.1</gxt.version>
+		
+		<webapp.dir>${project.build.directory}/${project.build.finalName}</webapp.dir>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>ru.svyaznoybank</groupId>
+			<artifactId>handbook-ejb</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>ru.svyaznoybank</groupId>
+			<artifactId>handbook-jpa</artifactId>
+			<type>ejb</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- GWT -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- GXT -->
+		<dependency>
+			<groupId>com.sencha.gxt</groupId>
+			<artifactId>gxt</artifactId>
+			<version>${gxt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<version>2.7</version>
+			<scope>provided</scope>
+		</dependency>
+            
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>2.7</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish.jersey.media</groupId>
+		    <artifactId>jersey-media-json-jackson</artifactId>
+		    <version>2.7</version>
+		    <scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- This folder uses for developing mode -->
+		<outputDirectory>${webapp.dir}/WEB-INF/classes</outputDirectory>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>${gwt.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+<!-- 							<goal>test</goal> -->
+<!-- 							<goal>i18n</goal> -->
+<!-- 							<goal>generateAsync</goal> -->
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<runTarget>handbook.html</runTarget>
+					<hostedWebapp>${webapp.dir}</hostedWebapp>
+<!-- 					<i18nMessagesBundle></i18nMessagesBundle> -->
+				</configuration>
+			</plugin>
+						
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<webappDirectory>${webapp.dir}</webappDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:usr="urn:import:ru.svyaznoybank.handbook.war.gwt.view"	
+	xmlns:grid="urn:import:com.sencha.gxt.widget.core.client.grid"
+	xmlns:cnt="urn:import:com.sencha.gxt.widget.core.client.container">
+	
+	<ui:with type="com.sencha.gxt.widget.core.client.grid.ColumnModel" field="cm"/>
+	<ui:with type="com.sencha.gxt.data.shared.ListStore" field="store"/>
+		
+	<ui:with type="com.sencha.gxt.widget.core.client.grid.GridView" field="view">
+		<ui:attributes forceFit="true" stripeRows="true" emptyText="Нет данных для отображения"/>
+	</ui:with>
+	
+<!-- 	<ui:with type="ru.svyaznoybank.handbook.war.gwt.ImageBundle" field="bundle"/> -->
+	
+	<cnt:NorthSouthContainer borders="false">
+		<cnt:widget>
+			<grid:Grid ui:field="grid" cm="{cm}" store="{store}" view="{view}" loadMask="true" borders="false"/>
+		</cnt:widget>
+		<cnt:south>
+			<usr:PagingBar pageSize="25" ui:field="pagingBar"/>
+		</cnt:south>
+	</cnt:NorthSouthContainer>
+</ui:UiBinder>

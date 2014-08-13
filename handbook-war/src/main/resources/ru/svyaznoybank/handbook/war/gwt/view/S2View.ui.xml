@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:core="urn:import:com.sencha.gxt.widget.core.client"
+	xmlns:cnt="urn:import:com.sencha.gxt.widget.core.client.container"
+	xmlns:btn="urn:import:com.sencha.gxt.widget.core.client.button"
+	xmlns:tlb="urn:import:com.sencha.gxt.widget.core.client.toolbar"
+	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form">
+	
+	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="westMargins">
+		<ui:attributes right="2"/>
+	</ui:with>	
+	<ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData" field="westData">
+		<ui:attributes size="350" maxSize="350" split="true" collapsible="true" margins="{westMargins}"/>
+	</ui:with>
+
+	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="centerMargins">
+		<ui:attributes left="2"/>
+	</ui:with>		
+	<ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData">
+		<ui:attributes margins="{centerMargins}"/>
+	</ui:with>
+	
+	<ui:with type="ru.svyaznoybank.handbook.war.gwt.ImageBundle" field="bundle"/>
+	
+	<cnt:BorderLayoutContainer borders="false" ui:field="cnt">
+		<cnt:center layoutData="{centerData}">
+			<core:ContentPanel borders="false" ui:field="centerCnt"/>
+		</cnt:center>
+		<cnt:west layoutData="{westData}">
+			<core:ContentPanel borders="false" headingText="Расширенный поиск" ui:field="westCnt">
+				<cnt:NorthSouthContainer>
+					<cnt:north>
+						<tlb:ToolBar>
+							<btn:TextButton icon="{bundle.search}" toolTip="Поиск" text="Поиск" ui:field="searchButton"/>
+							<tlb:FillToolItem/>
+							<btn:TextButton icon="{bundle.clear}" toolTip="Очистить" text="Очистить" ui:field="clearButton"/>
+						</tlb:ToolBar>
+					</cnt:north>
+					<cnt:widget>
+						<core:ContentPanel borders="false" bodyStyle="padding: 5px;" headerVisible="false" bodyBorder="false">
+							<form:FormPanel ui:field="formPanel"/>
+						</core:ContentPanel>
+					</cnt:widget>
+				</cnt:NorthSouthContainer>
+			</core:ContentPanel>
+		</cnt:west>	
+	</cnt:BorderLayoutContainer>
+</ui:UiBinder>

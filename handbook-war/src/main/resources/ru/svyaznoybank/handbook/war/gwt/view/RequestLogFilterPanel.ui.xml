@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:gwt="urn:import:com.google.gwt.user.client.ui"
+	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
+	xmlns:cnt="urn:import:com.sencha.gxt.widget.core.client.container">
+	
+	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
+    	<ui:attributes width="1" height="-1"/>
+  	</ui:with>
+  	
+	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="dateMargins">
+		<ui:attributes right="2"/>
+	</ui:with>
+	
+	<ui:with type="com.sencha.gxt.core.client.util.Margins" field="timeMargins">
+		<ui:attributes left="2"/>
+	</ui:with>
+  	
+  	<ui:with type="com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutData" field="dateBoxLayoutData">
+    	<ui:attributes flex="2" margins="{dateMargins}"/>
+  	</ui:with>
+  	
+  	<ui:with type="com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutData" field="timeBoxLayoutData">
+    	<ui:attributes flex="1" margins="{timeMargins}"/>
+  	</ui:with>
+
+  	<ui:with type="java.util.Date" field="maxDate"/>	
+  	<ui:with type="com.sencha.gxt.widget.core.client.form.DateTimePropertyEditor" field="dtpe"/>
+  	
+  	<cnt:VerticalLayoutContainer>
+  		<cnt:child layoutData="{verticalLayoutData}">
+	  		<form:FieldSet headingText="Данные клиента">
+	  			<cnt:VerticalLayoutContainer>
+			 		<cnt:child layoutData="{verticalLayoutData}">
+						<form:FieldLabel text="Имя">
+							<form:widget>
+								<form:TextField emptyText="Введите имя..." ui:field="firstName"/>
+							</form:widget>
+						</form:FieldLabel>
+					</cnt:child>
+					<cnt:child layoutData="{verticalLayoutData}">
+						<form:FieldLabel text="Фамилия">
+							<form:widget>
+								<form:TextField emptyText="Введите фамилию..." ui:field="lastName"/>
+							</form:widget>
+						</form:FieldLabel>
+					</cnt:child>
+					<cnt:child layoutData="{verticalLayoutData}">
+						<form:FieldLabel text="Отчество">
+							<form:widget>
+								<form:TextField emptyText="Введите отчество..." ui:field="patronymic"/>
+							</form:widget>
+						</form:FieldLabel>
+					</cnt:child>
+					<cnt:child layoutData="{verticalLayoutData}">
+						<form:FieldLabel text="Дата рождения">
+							<form:widget>
+								<form:DateField 
+									emptyText="Выберите дату рождения..." 
+									maxValue="{maxDate}"
+									propertyEditor="{dtpe}"
+									ui:field="birthday"
+								/>
+							</form:widget>
+						</form:FieldLabel>
+					</cnt:child> 				
+	  			</cnt:VerticalLayoutContainer>  			
+	  		</form:FieldSet>
+  		</cnt:child>
+  		
+  		<cnt:child layoutData="{verticalLayoutData}">
+	  		<form:FieldSet headingText="Дата запроса">
+	  			<cnt:VerticalLayoutContainer>
+	  				<cnt:child layoutData="{verticalLayoutData}">
+						<form:FieldLabel text="C" labelWidth="20">
+							<form:widget>
+								<cnt:HBoxLayoutContainer hBoxLayoutAlign="STRETCH">
+									<cnt:child layoutData="{dateBoxLayoutData}">
+										<form:DateField maxValue="{maxDate}" propertyEditor="{dtpe}" ui:field="beginDate"/>
+									</cnt:child>
+									<cnt:child layoutData="{timeBoxLayoutData}">
+										<form:TimeField ui:field="beginTime"/>
+									</cnt:child>
+								</cnt:HBoxLayoutContainer>
+							</form:widget>
+						</form:FieldLabel>
+					</cnt:child>
+					<cnt:child layoutData="{verticalLayoutData}">
+						<form:FieldLabel text="По" labelWidth="20">
+							<form:widget>
+								<cnt:HBoxLayoutContainer hBoxLayoutAlign="STRETCH">
+									<cnt:child layoutData="{dateBoxLayoutData}">
+										<form:DateField maxValue="{maxDate}" propertyEditor="{dtpe}" ui:field="endDate"/>
+									</cnt:child>
+									<cnt:child layoutData="{timeBoxLayoutData}">
+										<form:TimeField ui:field="endTime"/>
+									</cnt:child>
+								</cnt:HBoxLayoutContainer>
+							</form:widget>
+						</form:FieldLabel>
+					</cnt:child>
+	  			</cnt:VerticalLayoutContainer>
+	  		</form:FieldSet>
+  		</cnt:child>
+  	</cnt:VerticalLayoutContainer>
+</ui:UiBinder>

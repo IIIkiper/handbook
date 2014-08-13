@@ -1,0 +1,8 @@
+tr.hb-error-request-log-entry td {
+	background-color: #FFD6CC !important;
+}
+
+.hb-xml-response-log {
+	width: 96%;
+	border: 1px solid gray;
+}

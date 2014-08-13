@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"	
+	xmlns:core="urn:import:com.sencha.gxt.widget.core.client"
+	xmlns:grid="urn:import:com.sencha.gxt.widget.core.client.grid"
+	xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form" 
+	xmlns:btn="urn:import:com.sencha.gxt.widget.core.client.button"
+	xmlns:tlb="urn:import:com.sencha.gxt.widget.core.client.toolbar"
+	xmlns:cnt="urn:import:com.sencha.gxt.widget.core.client.container">
+	
+	<ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
+    	<ui:attributes width="1" height="-1"/>
+  	</ui:with>
+	
+	<core:Window ui:field="window" pixelSize="400, 130" modal="true" bodyStyle="padding: 5px 0 0 5px;">
+		<form:FormPanel ui:field="formPanel" >
+			<cnt:VerticalLayoutContainer>
+				<cnt:child layoutData="{verticalLayoutData}">
+					<form:FieldLabel text="Идентификатор">
+						<form:widget>
+							<form:TextField ui:field="id" allowBlank="false"/>
+						</form:widget>
+					</form:FieldLabel>
+				</cnt:child>	
+				<cnt:child layoutData="{verticalLayoutData}">
+					<form:FieldLabel text="Описание">
+						<form:widget>
+							<form:TextField ui:field="description" allowBlank="false"/>
+						</form:widget>
+					</form:FieldLabel>
+				</cnt:child>	
+			</cnt:VerticalLayoutContainer>
+		</form:FormPanel>
+
+		<core:button>
+			<btn:TextButton text="Отмена" ui:field="cancelBtn"/>
+		</core:button>
+		<core:button>
+			<btn:TextButton text="Сохранить" ui:field="saveBtn"/>
+		</core:button>
+	</core:Window>
+</ui:UiBinder>

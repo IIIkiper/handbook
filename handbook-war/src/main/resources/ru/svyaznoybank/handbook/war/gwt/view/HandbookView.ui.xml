@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" 
+	xmlns:core="urn:import:com.sencha.gxt.widget.core.client"
+	xmlns:menu="urn:import:com.sencha.gxt.widget.core.client.menu"
+	xmlns:btn="urn:import:com.sencha.gxt.widget.core.client.button"
+	xmlns:cnt="urn:import:com.sencha.gxt.widget.core.client.container">
+	
+	<ui:with type="ru.svyaznoybank.handbook.war.gwt.ImageBundle" field="bundle"/>
+	
+	<ui:import field="com.sencha.gxt.widget.core.client.button.ToolButton.*"/>
+		
+	<cnt:Viewport>
+		<core:ContentPanel headingText="Handbook Black" ui:field="cp" borders="false" bodyBorder="false">
+			<core:tool>
+				<btn:ToolButton config="{CLOSE}" toolTip="Выход"/>
+			</core:tool>
+
+			<cnt:NorthSouthContainer ui:field="cnt">
+				<cnt:north>
+					<menu:MenuBar ui:field="menuBar">
+						<menu:MenuBarItem text="Данные клиентов">
+							<menu:menu>
+								<menu:Menu>
+									<menu:MenuItem text="Клинеты" ui:field="clientItem" icon="{bundle.list}"/>
+									<menu:MenuItem text="Лог запросов" ui:field="requestLogItem" icon="{bundle.log}"/>
+								</menu:Menu>
+							</menu:menu>
+						</menu:MenuBarItem>
+						<menu:MenuBarItem text="Справочники">
+							<menu:menu>
+								<menu:Menu>
+									<menu:MenuItem text="Типы списков" ui:field="listType" icon="{bundle.list}"/>
+									<menu:MenuItem text="Типы предложений" ui:field="offerType" icon="{bundle.offer}"/>
+									<menu:MenuItem text="Типы андеррайтинга" ui:field="underwritingType" icon="{bundle.calculator}"/>							
+									<menu:MenuItem text="Типы документов" ui:field="documentType" icon="{bundle.document}"/>
+									<menu:MenuItem text="Типы продуктов" ui:field="productType" icon="{bundle.cart}"/>
+									<menu:MenuItem text="Типы валюты" ui:field="currencyType" icon="{bundle.money}"/>						
+								</menu:Menu>
+							</menu:menu>
+						</menu:MenuBarItem>
+						<menu:MenuBarItem text="Загрузки">
+							<menu:menu>
+								<menu:Menu>
+									<menu:MenuItem text="Загрузка списков" ui:field="listUpload" icon="{bundle.listUpload}"/>
+									<menu:MenuItem text="Загрузка предложений" icon="{bundle.offerUpload}">
+										<menu:submenu>
+											<menu:Menu>
+												<menu:MenuItem text="С закрытием"/>
+												<menu:MenuItem text="Без закрытия"/>
+											</menu:Menu>
+										</menu:submenu>
+									</menu:MenuItem>
+									<menu:MenuItem text="Загрузка сотрудников" icon="{bundle.userUpload}">
+										<menu:submenu>
+											<menu:Menu>
+												<menu:MenuItem text="Dual card"/>
+												<menu:MenuItem text="Cash loan"/>
+											</menu:Menu>
+										</menu:submenu>
+									</menu:MenuItem>
+									<menu:MenuItem text="Монитор загрузок" icon="{bundle.logUpload}"/>
+								</menu:Menu>
+							</menu:menu>
+						</menu:MenuBarItem>
+						<menu:MenuBarItem ui:field="securityBarItem" text="Администратор">
+							<menu:menu>
+								<menu:Menu>
+									<menu:MenuItem text="Права пользователей" ui:field="securityItem" icon="{bundle.users}"/>
+								</menu:Menu>
+							</menu:menu>
+						</menu:MenuBarItem>
+					</menu:MenuBar>
+				</cnt:north>
+			</cnt:NorthSouthContainer>
+		</core:ContentPanel>
+	</cnt:Viewport>
+</ui:UiBinder>
