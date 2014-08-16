@@ -21,7 +21,7 @@ public interface RequestLogProperties extends ModelProperties<RequestLog> {
 	ValueProvider<RequestLog, String> docSeries();
 	ValueProvider<RequestLog, String> docNumber();
 	ValueProvider<RequestLog, Date> docIssueDate();
-	ValueProvider<RequestLog, String> comment();
+	ValueProvider<RequestLog, String> remark();
 	
 	ValueProvider<RequestLog, String> docId();
 	ValueProvider<RequestLog, String> eanId();

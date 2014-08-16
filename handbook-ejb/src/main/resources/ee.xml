@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:Fault xmlns:ns2="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns3="http://www.w3.org/2003/05/soap-envelope">
+	<faultcode>ns2:Server</faultcode>
+	<faultstring>Exception occured</faultstring>
+	<detail>
+		<ns2:HandbookRequestException xmlns:ns2="http://svyaznoybank.ru/handbook/white">
+			<message>['requestId' may not be null]['parameters' may not be null]['requestDate' may not be null]</message>
+		</ns2:HandbookRequestException>
+	</detail>
+</ns2:Fault>
+

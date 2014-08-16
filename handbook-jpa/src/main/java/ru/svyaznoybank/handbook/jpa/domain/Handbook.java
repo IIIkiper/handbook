@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,7 +18,40 @@ import ru.svyaznoybank.handbook.jpa.domain.dic.Product;
 
 @Entity
 @Table(name = "HANDBOOK")
+@NamedNativeQuery(
+	name = Handbook.LAST_HANDBOOKS_IN_TYPE_ID_GROUPS_QUERY, 
+	query = 
+//		"SELECT id, code, value, remark FROM ( " + 
+		"SELECT * FROM ( " + 
+		"	SELECT h.*, MAX(h.update_time) OVER (PARTITION BY h.type_id) AS max_update_time FROM handbook h " +
+		"	INNER JOIN person p ON p.id = h.person_id " +
+		"	WHERE ( " +
+		"		( " +
+//		"			UPPER(p.last_name) IN (SUBSTR(UPPER(:LAST_NAME), 1, INSTR(UPPER(:LAST_NAME), ';') - 1), SUBSTR(UPPER(:LAST_NAME), INSTR(UPPER(:LAST_NAME), ';') + 1)) " + 
+		"			UPPER(p.last_name) = UPPER(:LAST_NAME) " + 
+		"			AND UPPER(p.first_name) = UPPER(:FIRST_NAME) " +
+		"			AND (UPPER(p.second_name) = UPPER(:SECOND_NAME) OR (p.second_name IS NULL AND :SECOND_NAME IS NULL)) " +
+		"			AND TRUNC(p.birthday) = TRUNC(:BIRTHDAY) " +
+		"			AND (p.phone_number = :PHONE_NUMBER OR p.phone_number IS NULL OR :PHONE_NUMBER IS NULL) " +
+		"		) " +
+		"		OR " +
+		"		( " +
+		"			p.doc_type = :DOC_TYPE " +
+		"			AND p.doc_series = :DOC_SERIES " +
+		"			AND p.doc_number = :DOC_NUMBER " +
+		"		) " +
+		"		OR p.customer_id = :CUSTOMER_ID " +
+		"	) " + 
+		"	AND (h.product_id = :PRODUCT_ID OR h.product_id IS NULL) " +
+		"	AND (h.currency = :CURRENCY_ID OR h.currency IS NULL OR :CURRENCY_ID IS NULL) " +
+		"	AND (h.end_date IS NULL OR TRUNC(h.end_date) >= TRUNC(:REQUEST_DATE)) " +
+		"	AND (h.begin_date IS NULL OR TRUNC(h.begin_date) <= TRUNC(:REQUEST_DATE)) " +
+		") " +
+		"WHERE update_time = max_update_time;"
+)
 public class Handbook extends AbstractIdentity {
+	
+	public static final String LAST_HANDBOOKS_IN_TYPE_ID_GROUPS_QUERY = "LAST_HANDBOOKS_IN_TYPE_ID_GROUPS_QUERY";
 
 	@Column(name = "VALUE")
 	private String value;

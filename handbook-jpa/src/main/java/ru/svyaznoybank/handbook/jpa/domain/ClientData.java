@@ -49,7 +49,7 @@ public class ClientData {
 	private Date docIssueDate;
 	
 	@Column(name = "REMARK")
-	private String comment;
+	private String remark;
 	
 	// DOC_TYPE mapping
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -112,11 +112,14 @@ public class ClientData {
 	public void setDocIssueDate(Date docIssueDate) {
 		this.docIssueDate = docIssueDate;
 	}
-	public String getComment() {
-		return comment;
+	public String getRemark() {
+		return remark;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public void setDoc(Document doc) {
+		this.doc = doc;
 	}
 	public String getDocId() {
 		return docId;

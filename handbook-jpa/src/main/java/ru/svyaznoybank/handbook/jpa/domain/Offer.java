@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +19,39 @@ import ru.svyaznoybank.handbook.jpa.domain.dic.UwtType;
 
 @Entity
 @Table(name = "PRE_APPROVE")
+@NamedNativeQuery(
+	name = Offer.LAST_OFFERS_IN_TYPE_ID_GROUPS_QUERY,
+	query = 
+		"SELECT * FROM ( " + 
+		"	SELECT a.*, MAX(a.update_time) OVER (PARTITION BY a.list_code /*a.id*/) AS max_update_time FROM pre_approve a " +
+		"	INNER JOIN person p ON p.id = a.person_id " +
+		"	WHERE ( " +
+		"		( " +
+//		"			UPPER(p.last_name) IN (SUBSTR(UPPER(:LAST_NAME), 1, INSTR(UPPER(:LAST_NAME), ';') - 1), SUBSTR(UPPER(:LAST_NAME), INSTR(UPPER(:LAST_NAME), ';') + 1)) " + 
+		"			UPPER(p.last_name) = UPPER(:LAST_NAME) " + 
+		"			AND UPPER(p.first_name) = UPPER(:FIRST_NAME) " +
+		"			AND (UPPER(p.second_name) = UPPER(:SECOND_NAME) OR (p.second_name IS NULL AND :SECOND_NAME IS NULL)) " +
+		"			AND TRUNC(p.birthday) = TRUNC(:BIRTHDAY) " +
+		"			AND (p.phone_number = :PHONE_NUMBER OR p.phone_number IS NULL OR :PHONE_NUMBER IS NULL) " +
+		"		) " +
+		"		OR " +
+		"		( " +
+		"			p.doc_type = :DOC_TYPE " +
+		"			AND p.doc_series = :DOC_SERIES " +
+		"			AND p.doc_number = :DOC_NUMBER " +
+		"		) " +
+		"		OR p.customer_id = :CUSTOMER_ID " +
+		"	) " + 
+		"	AND (a.product_id = :PRODUCT_ID OR a.product_id IS NULL) " +
+		"	AND (a.currency = :CURRENCY_ID OR a.currency IS NULL OR :CURRENCY_ID IS NULL) " +
+		"	AND (a.end_date IS NULL OR TRUNC(a.end_date) >= TRUNC(:REQUEST_DATE)) " +
+		"	AND (a.begin_date IS NULL OR TRUNC(a.begin_date) <= TRUNC(:REQUEST_DATE)) " +
+		") " +
+		"WHERE update_time = max_update_time;"		
+)
 public class Offer extends AbstractIdentity {
+	
+	public static final String LAST_OFFERS_IN_TYPE_ID_GROUPS_QUERY = "LAST_OFFERS_IN_TYPE_ID_GROUPS_QUERY";
 
 	@Column(name = "BEGIN_DATE")
 	@Temporal(TemporalType.DATE)

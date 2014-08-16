@@ -52,6 +52,14 @@
 							<contextRoot>handbook</contextRoot>
 						</webModule>
 					</modules>
+					<security>
+						<security-role>
+							<role-name>HandbookAdmin</role-name>
+						</security-role>
+						<security-role>
+							<role-name>HandbookOperator</role-name>
+						</security-role>
+					</security>
 					<defaultLibBundleDir>lib</defaultLibBundleDir>
 				</configuration>
 			</plugin>

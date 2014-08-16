@@ -16,5 +16,5 @@ public interface ClientProperties extends ModelProperties<Client> {
 	ValueProvider<Client, String> docSeries();
 	ValueProvider<Client, String> docNumber();
 	ValueProvider<Client, Date> docIssueDate();
-	ValueProvider<Client, String> comment();
+	ValueProvider<Client, String> remark();
 }

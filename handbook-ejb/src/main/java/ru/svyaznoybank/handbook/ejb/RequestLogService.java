@@ -5,12 +5,13 @@ import javax.ejb.Stateless;
 
 import ru.svyaznoybank.handbook.ejb.dto.RequestLogDto;
 import ru.svyaznoybank.handbook.ejb.util.PagingResult;
+import ru.svyaznoybank.handbook.jpa.dao.Dao;
 import ru.svyaznoybank.handbook.jpa.dao.RequestLogDao;
 import ru.svyaznoybank.handbook.jpa.domain.RequestLog;
 import ru.svyaznoybank.handbook.jpa.inquiry.RequestLogInquiry;
 
 @Stateless
-public class RequestLogService {
+public class RequestLogService extends Service<RequestLog> {
 	
 	@EJB
 	private RequestLogDao dao;
@@ -24,5 +25,10 @@ public class RequestLogService {
 			throw new IllegalArgumentException("ID cannot be null");
 		}
 		return dao.getResponse(id);
+	}
+
+	@Override
+	protected Dao<RequestLog> getDao() {
+		return dao;
 	}
 }

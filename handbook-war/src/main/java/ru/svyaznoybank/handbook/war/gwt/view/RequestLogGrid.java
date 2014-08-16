@@ -150,7 +150,7 @@ public class RequestLogGrid extends FastSearchGrid<RequestLog> {
 		docType.setHidden(true);
 		configs.add(docType);
 		
-		ColumnConfig<RequestLog, String> comment = new ColumnConfig<RequestLog, String>(properties.docId(), 1, "Комментарий");
+		ColumnConfig<RequestLog, String> comment = new ColumnConfig<RequestLog, String>(properties.remark(), 1, "Комментарий");
 		comment.setHidden(true);
 		configs.add(comment);
 		

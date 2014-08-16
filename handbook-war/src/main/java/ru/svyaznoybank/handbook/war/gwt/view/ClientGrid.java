@@ -55,7 +55,7 @@ public class ClientGrid extends FastSearchGrid<Client> implements ClientGridPres
 			}
 		});
 		
-		ColumnConfig<Client, String> comment = new ColumnConfig<Client, String>(properties.comment(), 1, "Комментарий");
+		ColumnConfig<Client, String> comment = new ColumnConfig<Client, String>(properties.remark(), 1, "Комментарий");
 		comment.setHidden(true);
 		configs.add(comment);
 		

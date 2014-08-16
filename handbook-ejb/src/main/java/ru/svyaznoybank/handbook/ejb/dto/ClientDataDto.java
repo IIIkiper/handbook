@@ -11,7 +11,7 @@ public abstract class ClientDataDto extends EntityDto {
 	private String docSeries;
 	private String docNumber;
 	private Date docIssueDate;
-	private String comment;
+	private String remark;
 	private String docId;
 	
 	// --- Getters / Setters ---
@@ -63,11 +63,11 @@ public abstract class ClientDataDto extends EntityDto {
 	public void setDocIssueDate(Date docIssueDate) {
 		this.docIssueDate = docIssueDate;
 	}
-	public String getComment() {
-		return comment;
+	public String getRemark() {
+		return remark;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	public String getDocId() {
 		return docId;

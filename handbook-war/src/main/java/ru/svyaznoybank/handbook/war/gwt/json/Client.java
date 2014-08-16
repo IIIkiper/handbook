@@ -31,6 +31,6 @@ public interface Client extends Dto {
 	public Date getDocIssueDate();
 	public void setDocIssueDate(Date docIssueDate);
 	
-	public String getComment();
-	public void setComment(String comment);
+	public String getRemark();
+	public void setRemark(String remark);
 }
